@@ -51,7 +51,7 @@ _read_field() {
     ' "$file"
 }
 
-ensure_dirs() {
+ensure_index_dirs() {
     mkdir -p "$(dirname "$INDEX_FILE")" "$SNIPPETS_DIR"
 }
 

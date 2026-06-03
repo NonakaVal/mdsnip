@@ -302,6 +302,14 @@ manage_tags() {
 # Criação de snippets e grupos
 # -----------------------------------------------------------------------------
 
+# Escape \ and & for safe use in bash parameter expansion replacement strings
+_escape_replacement() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//&/\\&}"
+    printf '%s' "$s"
+}
+
 new_snippet() {
     local current_dir="$1"
     local name
@@ -316,12 +324,18 @@ new_snippet() {
         local template
         template=$(ls "$TEMPLATE_DIR" | rofi_menu -p "Template (Esc=padrao)") || true
         if [ -n "$template" ] && [ -f "$TEMPLATE_DIR/$template" ]; then
-            local clipboard_content
-            clipboard_content="$(read_clipboard)"
-            sed -e "s/{{TITLE}}/$name/g" \
-                -e "s/{{DATE}}/$DATE_FORMAT/g" \
-                -e "s/{{CLIPBOARD}}/$clipboard_content/g" \
-                "$TEMPLATE_DIR/$template" > "$file_path"
+            local clipboard_content template_content
+            clipboard_content="$(read_clipboard 2>/dev/null || true)"
+            template_content="$(<"$TEMPLATE_DIR/$template")"
+
+            local escaped_name escaped_clip
+            escaped_name="$(_escape_replacement "$name")"
+            escaped_clip="$(_escape_replacement "$clipboard_content")"
+
+            template_content="${template_content//\{\{TITLE\}\}/$escaped_name}"
+            template_content="${template_content//\{\{DATE\}\}/$DATE_FORMAT}"
+            template_content="${template_content//\{\{CLIPBOARD\}\}/$escaped_clip}"
+            printf '%s\n' "$template_content" > "$file_path"
         else
             _default_snippet "$file_path" "$name"
         fi
