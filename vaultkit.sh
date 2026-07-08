@@ -132,7 +132,7 @@ main_menu() {
     local options choice
     options="$(printf "Navegar snippets\nHistorico\nFavoritos\nBuscar por tag\nBuscar no terminal\nConfiguracoes\nExportar\nImportar")"
 
-    choice=$(echo "$options" | rofi_menu -p "vaultkit") || return 0
+    choice=$(echo "$options" | rofi_menu -p "") || return 0
 
     case "$choice" in
         "Navegar snippets")
