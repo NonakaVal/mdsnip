@@ -12,10 +12,14 @@ element  { padding: 4px 8px; }
 element-text { font: "JetBrains Mono 9, Monospace 10"; }
 '
 
+ROFI_THEME_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/simple-tokyonight.rasi"
+
 rofi_menu() {
     local extra_args=()
     [ "$XDG_SESSION_TYPE" = "wayland" ] && extra_args+=("-normal-window")
-    rofi -dmenu -i "${extra_args[@]}" -theme-str "$ROFI_THEME" "$@"
+    local theme_args=()
+    [ -f "$ROFI_THEME_FILE" ] && theme_args+=("-theme" "$ROFI_THEME_FILE")
+    rofi -dmenu -i "${extra_args[@]}" "${theme_args[@]}" -theme-str "$ROFI_THEME" "$@"
 }
 
 # -----------------------------------------------------------------------------

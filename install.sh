@@ -20,9 +20,12 @@ set -euo pipefail
 # =============================================================================
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 VAULTKIT_SCRIPT="$SCRIPT_DIR/vaultkit.sh"
+ROFI_THEME_SOURCE="$SCRIPT_DIR/simple-tokyonight.rasi"
 INSTALL_PREFIX="${INSTALL_PREFIX:-/usr/local}"
 GLOBAL_BIN_DIR="${INSTALL_PREFIX}/bin"
 USER_BIN_DIR="${HOME}/.local/bin"
+ROFI_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/rofi"
+ROFI_THEME_TARGET="$ROFI_CONFIG_DIR/simple-tokyonight.rasi"
 
 # Dependências essenciais para snippets + notas + blocos
 REQUIRED_PKGS=(
@@ -95,8 +98,9 @@ check_os() {
 
 check_vaultkit_script() {
     [[ -f "$VAULTKIT_SCRIPT" ]] || die "vaultkit.sh não encontrado em: $VAULTKIT_SCRIPT"
+    [[ -f "$ROFI_THEME_SOURCE" ]] || die "Tema Rofi não encontrado em: $ROFI_THEME_SOURCE"
     [[ -d "$SCRIPT_DIR/lib" ]] || die "Diretório lib/ não encontrado em: $SCRIPT_DIR/lib"
-    log_ok "vaultkit.sh e lib/ encontrados"
+    log_ok "vaultkit.sh, tema Rofi e lib/ encontrados"
 }
 
 # Garante sudo para pacman e /usr/local/bin
@@ -267,6 +271,14 @@ install_global_command() {
     fi
 }
 
+# Instala o tema sem exigir privilégios de administrador.
+install_rofi_theme() {
+    log_step "Instalando tema padrão do Rofi"
+    mkdir -p "$ROFI_CONFIG_DIR"
+    install -m 0644 "$ROFI_THEME_SOURCE" "$ROFI_THEME_TARGET"
+    log_ok "Tema Rofi: $ROFI_THEME_TARGET"
+}
+
 # =============================================================================
 # Resumo final
 # =============================================================================
@@ -310,6 +322,7 @@ main() {
     ensure_terminal
     verify_dependencies
     install_global_command
+    install_rofi_theme
     print_summary
 }
 
