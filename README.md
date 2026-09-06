@@ -27,6 +27,7 @@ O instalador cuida de todas as dependências.
 
 ```bash
 vaultkit    # abre o menu principal no Rofi
+vaultkit search    # abre diretamente a busca no terminal (fzf)
 ```
 
 Menu principal:

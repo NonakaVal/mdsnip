@@ -223,4 +223,15 @@ browse_by_tag() {
 # =============================================================================
 # Entry point
 # =============================================================================
-main_menu
+case "${1:-}" in
+    search|terminal|buscar)
+        open_search
+        ;;
+    "")
+        main_menu
+        ;;
+    *)
+        printf 'Uso: %s [search|terminal|buscar]\n' "${0##*/}" >&2
+        exit 2
+        ;;
+esac

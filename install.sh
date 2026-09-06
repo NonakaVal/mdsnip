@@ -291,6 +291,7 @@ ${C_BOLD}${C_GREEN} Instalação do vaultkit concluída!${C_RESET}
 
 ${C_BOLD}Como usar:${C_RESET}
     vaultkit                # abre o menu principal (rofi)
+    vaultkit search         # abre diretamente a busca no terminal (fzf)
 
 ${C_BOLD}Comando instalado em:${C_RESET}
     $bin
