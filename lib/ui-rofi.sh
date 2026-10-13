@@ -6,7 +6,7 @@
 
 ROFI_THEME='
 window   { width: 680px; }
-listview { lines: 9; spacing: 2px; }
+listview { lines: 17; spacing: 2px; }
 inputbar { padding: 6px 8px; }
 element  { padding: 4px 8px; }
 element-text { font: "JetBrains Mono 9, Monospace 10"; }
@@ -19,7 +19,15 @@ rofi_menu() {
     [ "$XDG_SESSION_TYPE" = "wayland" ] && extra_args+=("-normal-window")
     local theme_args=()
     [ -f "$ROFI_THEME_FILE" ] && theme_args+=("-theme" "$ROFI_THEME_FILE")
-    rofi -dmenu -i "${extra_args[@]}" "${theme_args[@]}" -theme-str "$ROFI_THEME" "$@"
+    # GNOME (Mutter) nao implementa wlr-layer-shell exigido pelo rofi 2.0 no
+    # Wayland: forca backend X11 via XWayland apenas nesse caso. Outros
+    # compositores (Sway/Hyprland) continuam no layer-shell nativo.
+    if [ "$XDG_SESSION_TYPE" = "wayland" ] && [[ "${XDG_CURRENT_DESKTOP:-}" == *GNOME* ]]; then
+        WAYLAND_DISPLAY= GDK_BACKEND=x11 \
+            rofi -dmenu -i "${extra_args[@]}" "${theme_args[@]}" -theme-str "$ROFI_THEME" "$@"
+    else
+        rofi -dmenu -i "${extra_args[@]}" "${theme_args[@]}" -theme-str "$ROFI_THEME" "$@"
+    fi
 }
 
 # -----------------------------------------------------------------------------

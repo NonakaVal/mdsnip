@@ -31,10 +31,10 @@ element-icon, element-text, scrollbar {
 }
 
 window {
-  location : northwest;
-  width    : 280px;
-  x-offset : 1000px;
-  y-offset : 306px;
+  location : center;
+  width    : 680px;
+  x-offset : 0;
+  y-offset : 0;
 
   background-color: @bg1;
   border: 1px;
@@ -67,7 +67,7 @@ textbox {
 
 listview {
   padding      : 4px 0px;
-  lines        : 12;
+  lines        : 17;
   columns      : 1;
   scrollbar    : true;
   fixed-height : false;
