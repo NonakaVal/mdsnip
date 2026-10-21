@@ -1,6 +1,6 @@
-# vaultkit
+# mdsnip
 
-Gerenciador de snippets, notas e blocos de código via **Rofi** (GUI) e **fzf** (terminal). Snippets em Markdown com frontmatter YAML, compatível com tags do Obsidian.
+Gerenciador de snippets, notas e blocos de código via **Rofi** (GUI) e **fzf** (terminal). O repositório `mdsnip` mantém snippets em Markdown com frontmatter YAML, compatível com tags do Obsidian.
 
 ## Funcionalidades
 
@@ -21,13 +21,19 @@ Requer EndeavourOS / Arch Linux (`pacman`).
 INSTALL_PREFIX="$HOME/.local" ./install.sh    # instala em ~/.local/bin (sem sudo)
 ```
 
-O instalador cuida de todas as dependências.
+O instalador cuida de todas as dependências e pergunta onde ficam o vault e a pasta de snippets. Em modo não interativo, configure os diretórios com `MDSNIP_VAULT_DIR` e `MDSNIP_SNIPPETS_DIR`; sem essas variáveis, serão usados os padrões abaixo.
+
+```bash
+MDSNIP_VAULT_DIR="$HOME/Documentos/Notes" \
+MDSNIP_SNIPPETS_DIR="$HOME/Documentos/Notes/01 Snippets" \
+./install.sh
+```
 
 ## Uso
 
 ```bash
-vaultkit    # abre o menu principal no Rofi
-vaultkit search    # abre diretamente a busca no terminal (fzf)
+mdsnip         # abre o menu principal no Rofi
+mdsnip search  # abre diretamente a busca no terminal (fzf)
 ```
 
 Menu principal:
@@ -52,8 +58,10 @@ Criada automaticamente no primeiro uso:
 
 | Caminho | Conteúdo |
 |---|---|
-| `~/.config/vaultkit/config` | Arquivo de configuração |
+| `~/.config/mdsnip/config` | Arquivo de configuração |
+| `~/Documentos/Notes/` | Pasta padrão do vault |
 | `~/Documentos/Notes/01 Snippets/` | Pasta padrão de snippets |
-| `~/.local/share/vaultkit/` | Histórico, favoritos e índices |
+| `~/.local/share/mdsnip/` | Histórico, favoritos e índices |
+| `~/.cache/mdsnip/` | Cache |
 
 Edite `EDITOR_APP`, `TERMINAL_APP`, `VAULT_DIR` e outras variáveis no arquivo de configuração ou pelo menu **Configurações** do Rofi.
