@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =============================================================================
-# core.sh — Biblioteca interna do vaultkit
+# core.sh — Biblioteca interna do mdsnip
 # Consolidada de note_lib.sh + filesystem.sh + clipboard.sh
 # Sem dependências externas além de ferramentas do sistema.
 # =============================================================================
@@ -115,10 +115,10 @@ toggle_favorite() {
     if grep -qFx "$file" "$FAVORITES_FILE" 2>/dev/null; then
         grep -vFx "$file" "$FAVORITES_FILE" > "$FAVORITES_FILE.tmp" || true
         mv "$FAVORITES_FILE.tmp" "$FAVORITES_FILE"
-        notify-send "VaultKit" "\"$name\" removido dos favoritos."
+        notify-send "mdsnip" "\"$name\" removido dos favoritos."
     else
         echo "$file" >> "$FAVORITES_FILE"
-        notify-send "VaultKit" "\"$name\" adicionado aos favoritos."
+        notify-send "mdsnip" "\"$name\" adicionado aos favoritos."
     fi
 }
 
@@ -530,9 +530,9 @@ rel_time() {
 export_snippets() {
     local timestamp archive
     timestamp=$(date +%Y%m%d_%H%M%S)
-    archive="$SNIPPETS_DIR/vaultkit-export-${timestamp}.tar.gz"
+    archive="$SNIPPETS_DIR/mdsnip-export-${timestamp}.tar.gz"
     tar -czf "$archive" -C "$(dirname "$SNIPPETS_DIR")" "$(basename "$SNIPPETS_DIR")" 2>/dev/null
-    notify-send "VaultKit" "Exportado: $archive"
+    notify-send "mdsnip" "Exportado: $archive"
     echo "$archive"
 }
 
@@ -543,5 +543,5 @@ import_snippets() {
     tar -xzf "$archive" -C "$(dirname "$SNIPPETS_DIR")" 2>/dev/null
     count_after=$(find "$SNIPPETS_DIR" -type f -name "*.md" | wc -l)
     local added=$((count_after - count_before))
-    notify-send "VaultKit" "Importados $added snippets."
+    notify-send "mdsnip" "Importados $added snippets."
 }

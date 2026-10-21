@@ -207,7 +207,7 @@ show_actions() {
             fi
             echo -n "$code" | copy_to_clipboard
             add_to_history "$file"
-            notify-send "VaultKit" "\"$name\" copiado."
+            notify-send "mdsnip" "\"$name\" copiado."
             return 99
             ;;
         "Digitar")
@@ -288,12 +288,12 @@ manage_tags() {
                 [ -z "$new_tag" ] && continue
 
                 if echo "$current_tags" | grep -qiEx "$new_tag"; then
-                    notify-send "VaultKit" "Tag \"$new_tag\" ja existe."
+                    notify-send "mdsnip" "Tag \"$new_tag\" ja existe."
                     continue
                 fi
 
                 _tag_add "$file" "$new_tag"
-                notify-send "VaultKit" "Tag \"$new_tag\" adicionada."
+                notify-send "mdsnip" "Tag \"$new_tag\" adicionada."
                 ;;
 
             "Voltar"|"")
@@ -304,7 +304,7 @@ manage_tags() {
                 local tag_to_remove
                 tag_to_remove="$(echo "$choice" | sed 's/  x remover$//')"
                 _tag_remove "$file" "$tag_to_remove"
-                notify-send "VaultKit" "Tag \"$tag_to_remove\" removida."
+                notify-send "mdsnip" "Tag \"$tag_to_remove\" removida."
                 ;;
         esac
     done
@@ -383,7 +383,7 @@ create_group() {
     local clean_name
     clean_name="$(safe_dirname "$name")"
     mkdir -p "$current_dir/$clean_name"
-    notify-send "VaultKit" "Grupo: $clean_name"
+    notify-send "mdsnip" "Grupo: $clean_name"
     echo "$current_dir/$clean_name"
 }
 
@@ -394,7 +394,7 @@ confirm_delete() {
     check=$(echo -e "Nao\nSim" | rofi_menu -p "Apagar '$name'?") || return 0
     if [ "$check" = "Sim" ]; then
         rm "$file"
-        notify-send "VaultKit" "\"$name\" apagado."
+        notify-send "mdsnip" "\"$name\" apagado."
     fi
 }
 
@@ -511,7 +511,7 @@ open_settings() {
                 VAULT_DIR="$new_val"
                 mkdir -p "$VAULT_DIR"
                 save_config
-                notify-send "VaultKit" "Vault: $VAULT_DIR"
+                notify-send "mdsnip" "Vault: $VAULT_DIR"
                 ;;
             "Pasta de snippets:"*)
                 local new_val
@@ -520,7 +520,7 @@ open_settings() {
                 SNIPPETS_DIR="$new_val"
                 mkdir -p "$SNIPPETS_DIR"
                 save_config
-                notify-send "VaultKit" "Snippets: $SNIPPETS_DIR"
+                notify-send "mdsnip" "Snippets: $SNIPPETS_DIR"
                 ;;
             "Editor:"*)
                 local new_val
@@ -528,7 +528,7 @@ open_settings() {
                 [ -z "$new_val" ] && continue
                 EDITOR_APP="$new_val"
                 save_config
-                notify-send "VaultKit" "Editor: $EDITOR_APP"
+                notify-send "mdsnip" "Editor: $EDITOR_APP"
                 ;;
             "Ordenacao:"*)
                 local new_val

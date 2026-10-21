@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # =============================================================================
-# vaultkit — Gerenciador unificado de snippets + notas + blocos via Rofi
+# mdsnip — Gerenciador unificado de snippets + notas + blocos via Rofi
 # Repositório isolado. Sem dependência de scripts externos.
 # =============================================================================
 
@@ -108,7 +108,7 @@ open_search() {
     local term_bin="${term%% *}"
 
     if ! command -v "$term_bin" >/dev/null 2>&1; then
-        notify-send "vaultkit" "Terminal '$term_bin' não encontrado. Ajuste TERMINAL_APP no config."
+        notify-send "mdsnip" "Terminal '$term_bin' não encontrado. Ajuste TERMINAL_APP no config."
         return 1
     fi
 
@@ -141,7 +141,7 @@ main_menu() {
         "Historico")
             local entries chosen path
             entries="$(list_history)"
-            [ -z "$entries" ] && notify-send "VaultKit" "Historico vazio." && return 0
+            [ -z "$entries" ] && notify-send "mdsnip" "Historico vazio." && return 0
             chosen=$(echo -e "$entries" | rofi_menu -p "historico") || return 0
             [ -z "$chosen" ] && return 0
             path="$(echo "$chosen" | cut -f3)"
@@ -150,7 +150,7 @@ main_menu() {
         "Favoritos")
             local entries chosen path
             entries="$(list_favorites)"
-            [ -z "$entries" ] && notify-send "VaultKit" "Nenhum favorito." && return 0
+            [ -z "$entries" ] && notify-send "mdsnip" "Nenhum favorito." && return 0
             chosen=$(echo -e "$entries" | rofi_menu -p "favoritos") || return 0
             [ -z "$chosen" ] && return 0
             path="$(echo "$chosen" | cut -f3)"
@@ -173,7 +173,7 @@ main_menu() {
             archive=$(rofi_menu -p "Caminho do .tar.gz") || return 0
             [ -z "$archive" ] && return 0
             if [ ! -f "$archive" ]; then
-                notify-send "VaultKit" "Arquivo nao encontrado."
+                notify-send "mdsnip" "Arquivo nao encontrado."
                 return 0
             fi
             import_snippets "$archive"
@@ -190,7 +190,7 @@ browse_by_tag() {
     all_tags="$(collect_all_tags)"
 
     if [ -z "$all_tags" ]; then
-        notify-send "VaultKit" "Nenhuma tag encontrada."
+        notify-send "mdsnip" "Nenhuma tag encontrada."
         return 0
     fi
 
@@ -207,7 +207,7 @@ browse_by_tag() {
     done < <(find "$SNIPPETS_DIR" -type f -name "*.md" -print0 2>/dev/null | sort -z)
 
     if [ -z "$results" ]; then
-        notify-send "VaultKit" "Nenhum snippet com tag: $tag"
+        notify-send "mdsnip" "Nenhum snippet com tag: $tag"
         return 0
     fi
 

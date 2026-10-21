@@ -2,7 +2,7 @@
 
 # =============================================================================
 # note-search.sh — Busca de notas/blocos no terminal via fzf
-# Self-contained: lê VAULT_DIR/SNIPPETS_DIR do config do vaultkit e reaproveita
+# Self-contained: lê VAULT_DIR/SNIPPETS_DIR do config do mdsnip e reaproveita
 # as funções de core.sh. Sem dependência de note_search.sh / note_lib.sh.
 #
 # Uso (a partir de um terminal):
@@ -308,7 +308,7 @@ _send_to_workspace_name() {
     save_block "$VAULT_DIR/$rel_path" "$block_idx" "$target_dir"
   fi
 
-  notify-send "vaultkit" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
+  notify-send "mdsnip" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
 }
 
 _send_to_workspace_content() {
@@ -325,7 +325,7 @@ _send_to_workspace_content() {
   [[ -z "$target_dir" ]] && return 0
 
   save_block "$VAULT_DIR/$rel_path" "$block_idx" "$target_dir"
-  notify-send "vaultkit" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
+  notify-send "mdsnip" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
 }
 
 _send_to_workspace_block() {
@@ -336,7 +336,7 @@ _send_to_workspace_block() {
   [[ -z "$target_dir" ]] && return 0
 
   save_block "$VAULT_DIR/$rel_path" "$block_idx" "$target_dir"
-  notify-send "vaultkit" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
+  notify-send "mdsnip" "✓ salvo em '$(basename "$target_dir")/'" 2>/dev/null || true
 }
 
 export -f _note_title _preview_note _preview_note_line \
@@ -436,7 +436,7 @@ notes_fzf_blocks() {
 }
 
 # =============================================================================
-# Menu de busca (entrada única chamada pelo vaultkit)
+# Menu de busca (entrada única chamada pelo mdsnip)
 # =============================================================================
 
 nf() {
