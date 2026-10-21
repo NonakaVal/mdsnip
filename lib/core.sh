@@ -11,9 +11,9 @@
 # -----------------------------------------------------------------------------
 VAULT_DIR="${VAULT_DIR:-$HOME/Documentos/Notes}"
 SNIPPETS_DIR="${SNIPPETS_DIR:-$VAULT_DIR/01 Snippets}"
-INDEX_FILE="$HOME/.local/share/vaultkit/code-index.tsv"
+INDEX_FILE="$DATA_DIR/code-index.tsv"
 INDEX_MAX_AGE=86400
-WORKSPACE_CACHE="$HOME/.local/share/vaultkit/workspace-cache.tsv"
+WORKSPACE_CACHE="$DATA_DIR/workspace-cache.tsv"
 
 # =============================================================================
 # Utility — filename sanitization, field reading
