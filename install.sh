@@ -9,7 +9,7 @@
 #
 # Em modo não interativo, os diretórios podem ser definidos com:
 #   MDSNIP_VAULT_DIR="$HOME/Documentos/Notes"
-#   MDSNIP_SNIPPETS_DIR="$HOME/Documentos/Notes/01 Snippets"
+#   MDSNIP_SNIPPETS_DIR="$HOME/Documentos/Notes/Snippets"
 #
 # Uso:
 #   ./install.sh                                  # symlink em /usr/local/bin
@@ -502,7 +502,7 @@ ask_paths() {
         configured_vault="$(read_config_value VAULT_DIR || true)"
         configured_snippets="$(read_config_value SNIPPETS_DIR || true)"
         [[ -n "$configured_vault" ]] && default_vault="$configured_vault"
-        default_snippets="$default_vault/01 Snippets"
+        default_snippets="$default_vault/Snippets"
         [[ -n "$configured_snippets" ]] && default_snippets="$configured_snippets"
     fi
 
@@ -514,7 +514,7 @@ ask_paths() {
         VAULT_DIR="$VALIDATED_PATH"
     else
         VAULT_DIR="${MDSNIP_VAULT_DIR:-$default_vault}"
-        SNIPPETS_DIR="${MDSNIP_SNIPPETS_DIR:-$VAULT_DIR/01 Snippets}"
+        SNIPPETS_DIR="${MDSNIP_SNIPPETS_DIR:-$VAULT_DIR/Snippets}"
         validate_path "$VAULT_DIR" "vault" no || die "Caminho de vault inválido"
         VAULT_DIR="$VALIDATED_PATH"
         validate_path "$SNIPPETS_DIR" "snippets" no || die "Caminho de snippets inválido"

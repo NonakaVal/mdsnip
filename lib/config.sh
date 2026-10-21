@@ -23,7 +23,7 @@ load_config() {
     fi
 
     VAULT_DIR="${VAULT_DIR:-$HOME/Documentos/Notes}"
-    SNIPPETS_DIR="${SNIPPETS_DIR:-$VAULT_DIR/01 Snippets}"
+    SNIPPETS_DIR="${SNIPPETS_DIR:-$VAULT_DIR/Snippets}"
     EDITOR_APP="${EDITOR_APP:-mousepad}"
     TERMINAL_APP="${TERMINAL_APP:-$(detect_terminal)}"
     DEFAULT_SORT="${DEFAULT_SORT:-recent}"
@@ -72,7 +72,7 @@ write_default_config() {
             printf '# mdsnip — configuração\n'
             printf '# Pastas de busca / exemplos\n'
             printf 'VAULT_DIR=%s\n' "$(_config_quote "$HOME/Documentos/Notes")"
-            printf 'SNIPPETS_DIR=%s\n' "$(_config_quote "$HOME/Documentos/Notes/01 Snippets")"
+            printf 'SNIPPETS_DIR=%s\n' "$(_config_quote "$HOME/Documentos/Notes/Snippets")"
             printf '# Aplicativos\n'
             printf 'EDITOR_APP=%s\n' "$(_config_quote "mousepad")"
             printf 'TERMINAL_APP=%s   # terminal aberto pela busca (Buscar no terminal)\n' "$(_config_quote "$(detect_terminal)")"

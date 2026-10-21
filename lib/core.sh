@@ -10,7 +10,7 @@
 # Paths (setados por config.sh, defaults aqui)
 # -----------------------------------------------------------------------------
 VAULT_DIR="${VAULT_DIR:-$HOME/Documentos/Notes}"
-SNIPPETS_DIR="${SNIPPETS_DIR:-$VAULT_DIR/01 Snippets}"
+SNIPPETS_DIR="${SNIPPETS_DIR:-$VAULT_DIR/Snippets}"
 INDEX_FILE="$DATA_DIR/code-index.tsv"
 INDEX_MAX_AGE=86400
 WORKSPACE_CACHE="$DATA_DIR/workspace-cache.tsv"
@@ -179,7 +179,7 @@ normalize_snippet_target() {
     local target_dir="$1"
     [[ -z "$target_dir" ]] && return 1
 
-    # Relative path → save inside 01 Snippets
+    # Relative path → save inside Snippets
     if [[ "$target_dir" != /* ]]; then
         printf '%s/%s' "$SNIPPETS_DIR" "$target_dir"
         return 0
