@@ -21,7 +21,9 @@ Requer EndeavourOS / Arch Linux (`pacman`).
 INSTALL_PREFIX="$HOME/.local" ./install.sh    # instala em ~/.local/bin (sem sudo)
 ```
 
-O instalador cuida de todas as dependências e pergunta onde ficam o vault e a pasta de snippets. Em modo não interativo, configure os diretórios com `MDSNIP_VAULT_DIR` e `MDSNIP_SNIPPETS_DIR`; sem essas variáveis, serão usados os padrões abaixo.
+O instalador cuida das dependências e solicita os caminhos, um por vez: primeiro a pasta de snippets (onde serão salvos e pesquisados) e depois a Vault (onde estão as notas e os code blocks). Os dois inputs exibem valores padrão entre colchetes; pressione Enter para aceitá-los. Os padrões são `~/Documentos/Notes/01 Snippets` para snippets e `~/Documentos/Notes` para a Vault.
+
+Em modo não interativo, configure os diretórios com `MDSNIP_VAULT_DIR` e `MDSNIP_SNIPPETS_DIR`; sem essas variáveis, serão usados os mesmos padrões.
 
 ```bash
 MDSNIP_VAULT_DIR="$HOME/Documentos/Notes" \
@@ -59,8 +61,8 @@ Criada automaticamente no primeiro uso:
 | Caminho | Conteúdo |
 |---|---|
 | `~/.config/mdsnip/config` | Arquivo de configuração |
-| `~/Documentos/Notes/` | Pasta padrão do vault |
 | `~/Documentos/Notes/01 Snippets/` | Pasta padrão de snippets |
+| `~/Documentos/Notes/` | Pasta padrão do vault |
 | `~/.local/share/mdsnip/` | Histórico, favoritos e índices |
 | `~/.cache/mdsnip/` | Cache |
 

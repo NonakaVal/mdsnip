@@ -502,18 +502,16 @@ ask_paths() {
         configured_vault="$(read_config_value VAULT_DIR || true)"
         configured_snippets="$(read_config_value SNIPPETS_DIR || true)"
         [[ -n "$configured_vault" ]] && default_vault="$configured_vault"
+        default_snippets="$default_vault/01 Snippets"
+        [[ -n "$configured_snippets" ]] && default_snippets="$configured_snippets"
     fi
 
     if [[ "$interactive" == "yes" ]]; then
-        ask_interactive_path "Pasta do vault" "$default_vault"
-        VAULT_DIR="$VALIDATED_PATH"
-
-        default_snippets="$VAULT_DIR/01 Snippets"
-        if [[ -n "$configured_snippets" && "$VAULT_DIR" == "$default_vault" ]]; then
-            default_snippets="$configured_snippets"
-        fi
         ask_interactive_path "Pasta de snippets" "$default_snippets"
         SNIPPETS_DIR="$VALIDATED_PATH"
+
+        ask_interactive_path "Pasta da Vault (code blocks)" "$default_vault"
+        VAULT_DIR="$VALIDATED_PATH"
     else
         VAULT_DIR="${MDSNIP_VAULT_DIR:-$default_vault}"
         SNIPPETS_DIR="${MDSNIP_SNIPPETS_DIR:-$VAULT_DIR/01 Snippets}"
@@ -524,8 +522,8 @@ ask_paths() {
     fi
 
     update_config_paths
-    log_ok "Vault: $VAULT_DIR"
     log_ok "Snippets: $SNIPPETS_DIR"
+    log_ok "Vault: $VAULT_DIR"
 }
 
 # =============================================================================
@@ -547,8 +545,8 @@ ${C_BOLD}Comando instalado em:${C_RESET}
 
 ${C_BOLD}Configuração (criada no 1º uso):${C_RESET}
     $CONFIG_FILE
-    Vault: $VAULT_DIR
     Snippets: $SNIPPETS_DIR
+    Vault: $VAULT_DIR
 
 ${C_BOLD}Pacotes instalados:${C_RESET}
     rofi, ripgrep, fzf, gawk, libnotify, tar, mousepad, glow
